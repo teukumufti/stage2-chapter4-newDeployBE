@@ -57,18 +57,6 @@ exports.getUsers = async (req, res) => {
       ],
     });
 
-    // ? code dibawah disimpan, barangkali bisa dipakai
-    // data = JSON.parse(JSON.stringify(data));
-
-    // data = data.map((item) => {
-    //   return {
-    //     ...item,
-    //     profile: {
-    //       image: process.env.FILE_PATH + item?.profile?.image
-    //     }
-    //   }
-    // })
-
     res.status(200).send({
       status: "Success",
       message: "Get Users Success",
@@ -112,10 +100,12 @@ exports.getUser = async (req, res) => {
       ...data,
       profile: {
         phone: data?.profile?.phone,
-        gender:data?.profile?.gender,
-        address:data?.profile?.address,
-        image: data?.profile?.image ? (process.env.FILE_PATH + data?.profile?.image) : (null),
-      }
+        gender: data?.profile?.gender,
+        address: data?.profile?.address,
+        image: data?.profile?.image
+          ? process.env.FILE_PATH + data?.profile?.image
+          : null,
+      },
     };
 
     res.status(200).send({
